@@ -66,7 +66,14 @@ module.exports = {
   output: {
     path: path.resolve(appDirectory, 'dist'),
     publicPath: '/',
-    filename: 'rnw.bundle.js',
+    filename: '[name].bundle.js',
+    globalObject: 'self', // Important for workers
+    publicPath: '/',
+  },
+  experiments: {
+    // Enable WebAssembly support
+    asyncWebAssembly: true,
+    topLevelAwait: true,
   },
   resolve: {
     extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.js', '.js'],
@@ -76,17 +83,58 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.worker\.js$/,
+        use: {
+          loader: 'worker-loader',
+          options: {
+            worker: 'SharedWorker',
+            filename: '[name].[contenthash].worker.js',
+          },
+        },
+      },
+
+      // Handle SQLite WASM files
+      {
+        test: /\.wasm$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'wasm/[name].[contenthash][ext]',
+        },
+      },
       babelLoaderConfiguration,
       imageLoaderConfiguration,
       svgLoaderConfiguration,
       tsLoaderConfiguration,
     ],
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 3000,
+    hot: true,
+    historyApiFallback: true,
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Resource-Policy': 'cross-origin',
+    },
+    setupMiddlewares: (middlewares, devServer) => {
+      devServer.app.use((req, res, next) => {
+        res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+        res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+        next();
+      });
+      return middlewares;
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/index.html'),
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(true),
     }),

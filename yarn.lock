@@ -4930,6 +4930,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sqlite.org/sqlite-wasm@npm:^3.49.2-build1":
+  version: 3.49.2-build1
+  resolution: "@sqlite.org/sqlite-wasm@npm:3.49.2-build1"
+  bin:
+    sqlite-wasm: bin/index.js
+  checksum: 10c0/b30b9b0d2417fa950c20c07809457f93fa63d59abacd02a9b3a33a717ddea3ada7f5e44e62db8771da5f29999deaa92835c6bc9ce58cc4c3102894c4971119bb
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -5233,7 +5242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native-web@npm:^0":
+"@types/react-native-web@npm:^0.19.1":
   version: 0.19.1
   resolution: "@types/react-native-web@npm:0.19.1"
   dependencies:
@@ -12432,13 +12441,14 @@ __metadata:
     "@react-native/eslint-config": "npm:0.79.2"
     "@react-native/metro-config": "npm:0.79.2"
     "@react-native/typescript-config": "npm:0.79.2"
+    "@sqlite.org/sqlite-wasm": "npm:^3.49.2-build1"
     "@types/chai": "npm:^4.3.4"
     "@types/chance": "npm:^1.1.3"
     "@types/jest": "npm:^29.5.8"
     "@types/mocha": "npm:^10.0.1"
     "@types/react": "npm:^19.0.0"
     "@types/react-dom": "npm:^19"
-    "@types/react-native-web": "npm:^0"
+    "@types/react-native-web": "npm:^0.19.1"
     "@types/react-test-renderer": "npm:^18.0.0"
     babel-jest: "npm:^29.6.3"
     babel-loader: "npm:^10.0.0"
@@ -12475,6 +12485,7 @@ __metadata:
     webpack: "npm:^5.99.9"
     webpack-cli: "npm:^6.0.1"
     webpack-dev-server: "npm:^5.2.1"
+    worker-loader: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
 
@@ -15569,6 +15580,18 @@ __metadata:
   version: 2.0.1
   resolution: "wildcard@npm:2.0.1"
   checksum: 10c0/08f70cd97dd9a20aea280847a1fe8148e17cae7d231640e41eb26d2388697cbe65b67fd9e68715251c39b080c5ae4f76d71a9a69fa101d897273efdfb1b58bf7
+  languageName: node
+  linkType: hard
+
+"worker-loader@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "worker-loader@npm:3.0.8"
+  dependencies:
+    loader-utils: "npm:^2.0.0"
+    schema-utils: "npm:^3.0.0"
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 10c0/a81218a21efa05ab75265e9f6af9c2e27774aa8ca10737f849a094fa2b422ec14df82c35cbb285edb9f2d128b8038ae7dba6183c2f4fbdce20f216662df28244
   languageName: node
   linkType: hard
 
